@@ -16,7 +16,7 @@ Group:		X11/Applications
 Source0:	kdeextragear-3-%{ver}.tar.bz2
 # Source0-md5:	21c83484505cdeec5d3a55b62f0ac451
 Patch0:		%{name}_qttylock.cpp_dirtybuild.patch
-URL:		http://kde-bluetooth.sourceforge.net/
+URL:            http://extragear.kde.org/apps/kdebluetooth/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
