@@ -17,7 +17,7 @@ Source0:	kdeextragear-3-%{snap}.tar.bz2
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
-BuildRequires:	bluez-libs-devel
+BuildRequires:	bluez-libs-devel >= 2.6-2
 BuildRequires:	gettext-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
