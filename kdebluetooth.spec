@@ -68,8 +68,7 @@ cd kdebluetooth
 %install
 rm -rf $RPM_BUILD_ROOT
 
-cd kdebluetooth
-%{__make} install \
+%{__make} -C kdebluetooth install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	appsdir=%{_desktopdir}/kde \
 	k3bsetup2dir=%{_desktopdir}/kde \
@@ -80,11 +79,11 @@ for www in Application/kbtobexsrv.desktop \
 	Settings/{Network/Bluetooth/kcm_kbluetoothd,Peripherals/obex}.desktop \
 	System/kbluetoothd.desktop,Utilities/*.desktop;
 do
-	mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/$www,%{_desktopdir}/}
+	mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/$www,%{_desktopdir}}
 done
 for www in {kbtobexsrv,{kcm_,}kbluetoothd,obex,dunhandler,kbthandsfree,kbtserialchat,faxhandler,kbtobexclient,kbemusedsrv,kbtobexsrv}.desktop;
 do
-	echo "Categories=Qt;KDE;Network" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
+	echo "Categories=Qt;KDE;Network;" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
 done
 
 %clean
