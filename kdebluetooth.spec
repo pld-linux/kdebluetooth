@@ -4,17 +4,18 @@
 # * make it kdeextragears, not kdebluetooth-only 
 # * breqs
 # * fix files
-%define		snap	050226
 
+%define		ver	3.3.2
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
-Version:	3.3
-Release:	0.%{snap}.1
+Version:	3.3.2
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.kde.org/pub/kde/unstable/snapshots/kdeextragear-3-%{snap}.tar.bz2	
-# Source0-md5:	6632e85a06facf2e6be6317cd60ce585
+Source0:	kdeextragear-3-%{ver}.tar.bz2	
+# Source0-md5:	21c83484505cdeec5d3a55b62f0ac451
+Patch0:         kdebluetooth_qttylock.cpp_dirtybuild.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -50,7 +51,8 @@ Header files for kdebluetooth libraries.
 Pliki nag³ówkowe bibliotek kdebluetooth.
 
 %prep
-%setup -q -n kdeextragear-3-%{snap}
+%setup -q -n kdeextragear-3-%{ver}
+%patch0	-p1
 
 %build
 %{__make} -f Makefile.cvs
@@ -94,13 +96,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/apps/kdebluetooth
 %{_datadir}/applnk/.hidden/*.desktop
-#TODO - make it vfolders compat.
-# i.e. use
-#  %{_desktopdir}/kde/*.desktop
-# instead of non-existing:
-#%{_datadir}/applnk/*/*/*.desktop
-#%{_datadir}/applnk/*/*/*/*.desktop
-#%{_datadir}/applnk/*/*.desktop
+%{_desktopdir}/kde/*/*/*/*.desktop
+%{_desktopdir}/kde/*/*/*.desktop
+%{_desktopdir}/kde/*/*.desktop
+%{_desktopdir}/kde/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
 %{_datadir}/sounds/*
@@ -109,6 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 # XXX: dup (apps/kdebluetooth/*)
 %{_datadir}/apps/*/*
 %{_datadir}/config/*
+%{_datadir}/desktop-directories/*
 
 %files devel
 %defattr(644,root,root,755)
