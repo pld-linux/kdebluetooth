@@ -2,18 +2,18 @@
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
 # * s/Network/"Network/Bluetooth"? 
-%define		ver	3.3.2
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
-Version:	3.3.2
-Release:	1
+Version:	1.0
+%define		_beta	beta1
+Release:	0.%{_beta}.1
+Epoch:          1
 License:	GPL
 Group:		X11/Applications
-Source0:	kdeextragear-3-%{ver}.tar.bz2
-# Source0-md5:	21c83484505cdeec5d3a55b62f0ac451
-Patch0:		%{name}_qttylock.cpp_dirtybuild.patch
-URL:		http://extragear.kde.org/apps/kdebluetooth/
+Source0:	http://dl.sourceforge.net/sourceforge/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
+# Source0-md5:	11244d5acf07a79e04a447ff2a3bccdf
+URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
@@ -57,8 +57,7 @@ Header files for kdebluetooth libraries.
 Pliki nag³ówkowe bibliotek kdebluetooth.
 
 %prep
-%setup -q -n kdeextragear-3-%{ver}
-%patch0	-p1
+%setup -q -n %{name}-%{version}_%{_beta}
 
 %build
 %{__make} -f Makefile.cvs
