@@ -13,7 +13,7 @@ Group:		X11/Applications
 Source0:	kdeextragear-3-%{ver}.tar.bz2
 # Source0-md5:	21c83484505cdeec5d3a55b62f0ac451
 Patch0:		%{name}_qttylock.cpp_dirtybuild.patch
-URL:            http://extragear.kde.org/apps/kdebluetooth/
+URL:		http://extragear.kde.org/apps/kdebluetooth/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
@@ -76,13 +76,15 @@ cd kdebluetooth
 	kde_htmldir=%{_kdedocdir}
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-for www in {Application/kbtobexsrv.desktop,Settings/Network/Bluetooth/kcm_kbluetoothd.desktop,Settings/Peripherals/obex.desktop,System/kbluetoothd.desktop,Utilities/*.desktop};
- do
-  mv -f $RPM_BUILD_ROOT%{_datadir}/applnk/$www $RPM_BUILD_ROOT%{_desktopdir}/
+for www in Application/kbtobexsrv.desktop \
+	Settings/{Network/Bluetooth/kcm_kbluetoothd,Peripherals/obex}.desktop \
+	System/kbluetoothd.desktop,Utilities/*.desktop;
+do
+	mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/$www,%{_desktopdir}/}
 done
-for www in {kbtobexsrv.desktop,kcm_kbluetoothd.desktop,obex.desktop,kbluetoothd.desktop,dunhandler.desktop,kbthandsfree.desktop,kbtserialchat.desktop,faxhandler.desktop,kbtobexclient.desktop,kbemusedsrv.desktop,kbtobexsrv.desktop};
- do
-   echo "Categories=Qt;KDE;Network" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
+for www in {kbtobexsrv,{kcm_,}kbluetoothd,obex,dunhandler,kbthandsfree,kbtserialchat,faxhandler,kbtobexclient,kbemusedsrv,kbtobexsrv}.desktop;
+do
+	echo "Categories=Qt;KDE;Network" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
 done
 
 %clean
