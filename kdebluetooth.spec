@@ -30,13 +30,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The KDE Bluetooth Framework is a set of tools built on top of Linux'
-Bluetooth stack BlueZ. Our goal is to provide easy access to the most
+Bluetooth stack BlueZ. Its goal is to provide easy access to the most
 common Bluetooth profiles and to make data exchange with Bluetooth
 enabled phones and PDAs as straightforward as possible
 
 %description -l pl
 Projekt KDE Bluetooth jest zestawem narzêdzi zbudowanych na górnej
-warstiwe stosu Bluetooth BlueZ. Naszym celem jest dostarczenie ³atwego
+warstiwe stosu Bluetooth BlueZ. Jego celem jest dostarczenie ³atwego
 dostêpu do wiêkszo¶ci profili Bluetooth oraz wymiany danych z
 telefonami komórkowymi z Bluetooth oraz PDA tak bezpo¶rednio jak to
 jest mo¿liwe.
@@ -78,7 +78,8 @@ cd kdebluetooth
 	k3bsetup2dir=%{_desktopdir}/kde \
 	kde_htmldir=%{_kdedocdir}
 
-mv $RPM_BUILD_ROOT%{_datadir}/{applnk,applications}
+# XXX: desktopdir is _FLAT_
+mv $RPM_BUILD_ROOT{%{_datadir}/applnk,%{_desktopdir}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -100,20 +101,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/apps/kdebluetooth
-%{_desktopdir}/*/*/*/*.desktop
-%{_desktopdir}/*/*/*.desktop
-%{_desktopdir}/*/*.desktop
+%{_desktopdir}/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
 %{_datadir}/sounds/*
 %{_iconsdir}/*/*/*/*.png
 %{_datadir}/mimelnk/bluetooth
+# XXX: BROKEN (duplicates above %{_datadir}/apps/...)
 %{_datadir}/apps/*/*
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
 %{_datadir}/autostart/kbluetoothd.autostart.desktop
-%{_datadir}/applications/.hidden/kioobex_start.desktop
-%{_datadir}/applications/Settings/Network/Bluetooth/.directory
 
 %files devel
 %defattr(644,root,root,755)
