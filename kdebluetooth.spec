@@ -109,9 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/kdebluetooth
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
 %{_iconsdir}/*/*/*/*.png
+%{_iconsdir}/crystalsvg/scalable/apps/kdebluetooth.svgz
 %{_desktopdir}/*.desktop
 %{_datadir}/apps/kbluetoothd
-#%{_datadir}/apps/kbthandsfree
 %{_datadir}/apps/kbtobexclient
 %{_datadir}/apps/kdebluetooth/dunhandler
 %{_datadir}/apps/kdebluetooth/faxhandler
@@ -120,7 +120,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
-#%{_datadir}/sounds/*
 %{_datadir}/mimelnk/bluetooth
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
