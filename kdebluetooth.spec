@@ -20,6 +20,7 @@ BuildRequires:	bluez-libs-devel >= 2.6-2
 BuildRequires:	gettext-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
+BuildRequires:	lockdev-devel
 BuildRequires:	openobex-devel >= 1.0.0
 BuildRequires:	qt-devel >= 3.1
 BuildRequires:	xrender-devel
@@ -43,7 +44,10 @@ Summary:	Header files for kdebluetooth libraries
 Summary(pl):	Pliki nag³ówkowe bibliotek kdebluetooth
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	bluez-libs-devel
 Requires:	kdelibs-devel
+# when no baudboy.h interface
+Requires:	lockdev-devel
 
 %description devel
 Header files for kdebluetooth libraries.
@@ -60,6 +64,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %configure \
 	--%{!?debug:dis}%{?debug:en}able-debug \
 	--disable-rpath \
+	--with-bluetooth-libraries=%{_libdir} \
 	--with-qt-libraries=%{_libdir} \
 	%{!?with_setup:--with-k3bsetup=no}
 cd kdebluetooth
@@ -77,9 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 for www in Application/kbtobexsrv.desktop \
 	Settings/{Network/Bluetooth/kcm_kbluetoothd,Peripherals/obex}.desktop \
-	System/kbluetoothd.desktop,Utilities/*.desktop;
+	System/kbluetoothd.desktop Utilities/*.desktop;
 do
-	mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/$www,%{_desktopdir}}
+	mv -f $RPM_BUILD_ROOT%{_datadir}/applnk/$www $RPM_BUILD_ROOT%{_desktopdir}
 done
 for www in {kbtobexsrv,{kcm_,}kbluetoothd,obex,dunhandler,kbthandsfree,kbtserialchat,faxhandler,kbtobexclient,kbemusedsrv,kbtobexsrv}.desktop;
 do
@@ -97,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libqobex.so.*.*.*
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kcm_*.la
 %attr(755,root,root) %{_libdir}/kde3/kio_*.so
@@ -106,11 +111,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
 %{_iconsdir}/*/*/*/*.png
 %{_desktopdir}/*.desktop
+%{_datadir}/apps/kbluetoothd
+%{_datadir}/apps/kbthandsfree
+%{_datadir}/apps/kbtobexclient
+%{_datadir}/apps/kdebluetooth
+%{_datadir}/apps/konqsidebartng/virtual_folders/services/*.desktop
+%{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
 %{_datadir}/sounds/*
 %{_datadir}/mimelnk/bluetooth
-%{_datadir}/apps/*/*
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
 %{_datadir}/autostart/kbluetoothd.autostart.desktop
