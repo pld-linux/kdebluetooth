@@ -73,8 +73,8 @@ cd kdebluetooth
 	appsdir=%{_desktopdir}/kde \
 	k3bsetup2dir=%{_desktopdir}/kde \
 	kde_htmldir=%{_kdedocdir}
-mv $RPM_BUILD_ROOT/usr/share/applnk/ $RPM_BUILD_ROOT/%{_desktopdir}
-#rm -frd $RPM_BUILD_ROOT/usr/share/applnk
+
+mv $RPM_BUILD_ROOT/usr/share/{applnk,applications}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -96,7 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/apps/kdebluetooth
-#{_datadir}/applnk/.hidden/*.desktop
 %{_desktopdir}/*/*/*/*.desktop
 %{_desktopdir}/*/*/*.desktop
 %{_desktopdir}/*/*.desktop
