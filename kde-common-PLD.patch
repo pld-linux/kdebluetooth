@@ -1,0 +1,57 @@
+--- kde-common/admin/acinclude.m4.in.2.455	2004-06-01 13:50:00.863844064 +0200
++++ kde-common/admin/acinclude.m4.in	2004-06-01 13:49:21.877770848 +0200
+@@ -428,7 +428,7 @@
+ if test "$1" = "default"; then
+ 
+   if test -z "$kde_htmldir"; then
+-    kde_htmldir='\${datadir}/doc/HTML'
++    kde_htmldir='/usr/share/doc/kde/HTML'
+   fi
+   if test -z "$kde_appsdir"; then
+     kde_appsdir='\${datadir}/applnk'
+@@ -4276,32 +4276,11 @@
+ [
+     AC_MSG_CHECKING([for utmp file])
+ 
+-    AC_CACHE_VAL(kde_cv_utmp_file,
+-    [
+-    kde_cv_utmp_file=no
+-
+-    for ac_file in    \
+-                      \
+-	/var/run/utmp \
+-	/var/adm/utmp \
+-	/etc/utmp     \
+-     ; \
+-    do
+-     if test -r "$ac_file"; then
+-       kde_cv_utmp_file=$ac_file
+-       break
+-     fi
+-    done
+-    ])
++    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
+ 
+-    if test "$kde_cv_utmp_file" != "no"; then
+-	AC_DEFINE_UNQUOTED(UTMP, "$kde_cv_utmp_file", [Define the file for utmp entries])
+-	$1
+-	AC_MSG_RESULT($kde_cv_utmp_file)
+-    else
+-    	$2
+-	AC_MSG_RESULT([non found])
+-    fi
++    AC_DEFINE_UNQUOTED(UTMP, "$kde_cv_utmp_file", [Define the file for utmp entries])
++    $1
++    AC_MSG_RESULT(We are using $kde_cv_utmp_file in PLD instead.)
+ ])
+ 
+ 
+@@ -5078,7 +5057,7 @@
+   kde_qtdir="$with_qt_dir"
+ fi
+ 
+-AC_FIND_FILE(qsql.html, [ $kde_qtdir/doc/html $QTDIR/doc/html /usr/share/doc/packages/qt3/html /usr/lib/qt/doc /usr/lib/qt3/doc /usr/lib/qt3/doc/html /usr/doc/qt3/html /usr/doc/qt3 /usr/share/doc/qt3-doc /usr/share/qt3/doc/html /usr/X11R6/share/doc/qt/html ], QTDOCDIR)
++AC_FIND_FILE(qsql.html, [ /usr/share/doc/qt-doc/html ], QTDOCDIR)
+ AC_MSG_RESULT($QTDOCDIR)
+ 
+ AC_SUBST(QTDOCDIR)
