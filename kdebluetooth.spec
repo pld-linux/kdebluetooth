@@ -80,15 +80,14 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir}
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-for www in Application/kbtobexsrv.desktop \
-	Settings/{Network/Bluetooth/kcm_kbluetoothd,Peripherals/obex}.desktop \
-	System/kbluetoothd.desktop Utilities/*.desktop;
+for www in Settings/Peripherals/obex.desktop Utilities/*.desktop;
 do
 	mv -f $RPM_BUILD_ROOT%{_datadir}/applnk/$www $RPM_BUILD_ROOT%{_desktopdir}
 done
-for www in {kbtobexsrv,{kcm_,}kbluetoothd,obex,dunhandler,kbthandsfree,kbtserialchat,faxhandler,kbtobexclient,kbemusedsrv,kbtobexsrv}.desktop;
+mv -f $RPM_BUILD_ROOT%{_desktopdir}/kde/*.desktop $RPM_BUILD_ROOT%{_desktopdir}
+for www in {dunhandler,faxhandler,kbemusedsrv,kbluetoothd,kbtobexclient,kbtobexsrv,kbtserialchat,kcm_btpaired,kcm_kbluetoothd,obex}.desktop;
 do
-	echo "Categories=Qt;KDE;Network;" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
+ echo "Categories=Qt;KDE;Network;" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
 done
 
 %clean
@@ -112,14 +111,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*/*.png
 %{_desktopdir}/*.desktop
 %{_datadir}/apps/kbluetoothd
-%{_datadir}/apps/kbthandsfree
+#%{_datadir}/apps/kbthandsfree
 %{_datadir}/apps/kbtobexclient
-%{_datadir}/apps/kdebluetooth
+%{_datadir}/apps/kdebluetooth/dunhandler
+%{_datadir}/apps/kdebluetooth/faxhandler
+%{_datadir}/apps/kdebluetooth/job-templates
 %{_datadir}/apps/konqsidebartng/virtual_folders/services/*.desktop
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
-%{_datadir}/sounds/*
+#%{_datadir}/sounds/*
 %{_datadir}/mimelnk/bluetooth
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
