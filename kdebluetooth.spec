@@ -8,10 +8,10 @@ Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
 Release:	0.%{_beta}.1
-Epoch:          1
+Epoch:		1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://dl.sourceforge.net/sourceforge/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
+Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
 # Source0-md5:	11244d5acf07a79e04a447ff2a3bccdf
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
@@ -113,6 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 %{_datadir}/apps/kbluetoothd
 %{_datadir}/apps/kbtobexclient
+%dir %{_datadir}/apps/kdebluetooth
 %{_datadir}/apps/kdebluetooth/dunhandler
 %{_datadir}/apps/kdebluetooth/faxhandler
 %{_datadir}/apps/kdebluetooth/job-templates
