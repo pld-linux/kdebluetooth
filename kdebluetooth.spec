@@ -1,7 +1,7 @@
 #
 # TODO:
 # * applnk->vfolders
-# * make it kdeextragears, not kdebluetooth-only 
+# * make it kdeextragears, not kdebluetooth-only
 # * breqs
 # * fix files
 
@@ -13,9 +13,9 @@ Version:	3.3.2
 Release:	0.2
 License:	GPL
 Group:		X11/Applications
-Source0:	kdeextragear-3-%{ver}.tar.bz2	
+Source0:	kdeextragear-3-%{ver}.tar.bz2
 # Source0-md5:	21c83484505cdeec5d3a55b62f0ac451
-Patch0:         kdebluetooth_qttylock.cpp_dirtybuild.patch
+Patch0:		%{name}_qttylock.cpp_dirtybuild.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -29,13 +29,17 @@ BuildRequires:	xrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The long term goal of the KDE Bluetooth Framework is to provide tools
-for all of the most common Bluetooth profiles.
+The KDE Bluetooth Framework is a set of tools built on top of Linux'
+Bluetooth stack BlueZ. Our goal is to provide easy access to the most
+common Bluetooth profiles and to make data exchange with Bluetooth
+enabled phones and PDAs as straightforward as possible
 
 %description -l pl
-D³ugoterminowym celem projektu KDE Bluetooth Framework jest
-dostarczenie narzêdzi do wszystkich najbardziej popularnych profili
-Bluetooth. 
+Projekt KDE Bluetooth jest zestawem narzêdzi zbudowanych na górnej
+warstiwe stosu Bluetooth BlueZ. Naszym celem jest dostarczenie ³atwego
+dostêpu do wiêkszo¶ci profili Bluetooth oraz wymiany danych z
+telefonami komórkowymi z Bluetooth oraz PDA tak bezpo¶rednio jak to
+jest mo¿liwe.
 
 %package devel
 Summary:	Header files for kdebluetooth libraries
@@ -61,7 +65,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 	--disable-rpath \
 	--with-qt-libraries=%{_libdir} \
 	%{!?with_setup:--with-k3bsetup=no}
-cd kdebluetooth	
+cd kdebluetooth
 %{__make}
 
 %install
@@ -74,7 +78,7 @@ cd kdebluetooth
 	k3bsetup2dir=%{_desktopdir}/kde \
 	kde_htmldir=%{_kdedocdir}
 
-mv $RPM_BUILD_ROOT/usr/share/{applnk,applications}
+mv $RPM_BUILD_ROOT%{_datadir}/{applnk,applications}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,9 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files 
+%files
 %defattr(644,root,root,755)
-%doc README 
+%doc README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
