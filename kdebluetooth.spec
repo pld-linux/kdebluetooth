@@ -10,7 +10,7 @@ Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	3.3.2
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Applications
 Source0:	kdeextragear-3-%{ver}.tar.bz2	
@@ -73,7 +73,8 @@ cd kdebluetooth
 	appsdir=%{_desktopdir}/kde \
 	k3bsetup2dir=%{_desktopdir}/kde \
 	kde_htmldir=%{_kdedocdir}
-	
+mv $RPM_BUILD_ROOT/usr/share/applnk/ $RPM_BUILD_ROOT/%{_desktopdir}
+#rm -frd $RPM_BUILD_ROOT/usr/share/applnk
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -95,20 +96,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
 %{_datadir}/apps/kdebluetooth
-%{_datadir}/applnk/.hidden/*.desktop
-%{_desktopdir}/kde/*/*/*/*.desktop
-%{_desktopdir}/kde/*/*/*.desktop
-%{_desktopdir}/kde/*/*.desktop
-%{_desktopdir}/kde/*.desktop
+#{_datadir}/applnk/.hidden/*.desktop
+%{_desktopdir}/*/*/*/*.desktop
+%{_desktopdir}/*/*/*.desktop
+%{_desktopdir}/*/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
 %{_datadir}/sounds/*
 %{_iconsdir}/*/*/*/*.png
 %{_datadir}/mimelnk/bluetooth
-# XXX: dup (apps/kdebluetooth/*)
 %{_datadir}/apps/*/*
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
+%{_datadir}/autostart/kbluetoothd.autostart.desktop
+%{_datadir}/applications/.hidden/kioobex_start.desktop
+%{_datadir}/applications/Settings/Network/Bluetooth/.directory
 
 %files devel
 %defattr(644,root,root,755)
