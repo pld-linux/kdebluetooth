@@ -7,39 +7,52 @@
 %define		snap	040410
 
 Summary:	KDE Bluetooth framework
+Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	0.1.%{snap}
 Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	kdeextragear-3-%{snap}.tar.bz2
-URL:		http://k3b.sourceforge.net/
+URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
+BuildRequires:	bluez-libs-devel
 BuildRequires:	gettext-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
+BuildRequires:	openobex-devel >= 1.0.0
 BuildRequires:	qt-devel >= 3.1
 BuildRequires:	xrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-TODO
+The long term goal of the KDE Bluetooth Framework is to provide tools
+for all of the most common Bluetooth profiles.
+
+%description -l pl
+D³ugoterminowym celem projektu KDE Bluetooth Framework jest
+dostarczenie narzêdzi do wszystkich najbardziej popularnych profili
+Bluetooth. 
 
 %package devel
-Summary:	Header files for kdebluetooth library
+Summary:	Header files for kdebluetooth libraries
+Summary(pl):	Pliki nag³ówkowe bibliotek kdebluetooth
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	kdelibs-devel
 
 %description devel
-TODO
+Header files for kdebluetooth libraries.
+
+%description devel -l pl
+Pliki nag³ówkowe bibliotek kdebluetooth.
 
 %prep
 %setup -q -n kdeextragear-3
 
 %build
-make -f Makefile.cvs
+%{__make} -f Makefile.cvs
 %configure \
 	--%{!?debug:dis}%{?debug:en}able-debug \
 	--disable-rpath \
@@ -71,31 +84,33 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%attr(755,root,root) %{_libdir}/kdebluetooth/*
-%{_datadir}/apps/konqueror/servicemenus/*.desktop
-%{_datadir}/apps/kdebluetooth
-%{_datadir}/applnk/.hidden/*.desktop
-%{_datadir}/applnk/*/*/*.desktop
-%{_datadir}/applnk/*/*/*/*.desktop
-%{_datadir}/applnk/*/*.desktop
-%{_datadir}/servicetypes/*
-%{_datadir}/services/*
-%{_datadir}/sounds/*
-%{_iconsdir}/*/*/*/*.png
-%{_datadir}/mimelnk/bluetooth/
-%{_datadir}/apps/*/*
-%{_datadir}/config/*
-
-#TODO - make it vfolders compat.
-#%{_desktopdir}/kde/*.desktop
-
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kcm_*.la
 %attr(755,root,root) %{_libdir}/kde3/kio_*.so
 %{_libdir}/kde3/kio_*.la
+%dir %{_libdir}/kdebluetooth
+%attr(755,root,root) %{_libdir}/kdebluetooth/*
+%{_datadir}/apps/konqueror/servicemenus/*.desktop
+%{_datadir}/apps/kdebluetooth
+%{_datadir}/applnk/.hidden/*.desktop
+#TODO - make it vfolders compat.
+# i.e. use
+#  %{_desktopdir}/kde/*.desktop
+# instead of non-existing:
+#%{_datadir}/applnk/*/*/*.desktop
+#%{_datadir}/applnk/*/*/*/*.desktop
+#%{_datadir}/applnk/*/*.desktop
+%{_datadir}/servicetypes/*
+%{_datadir}/services/*
+%{_datadir}/sounds/*
+%{_iconsdir}/*/*/*/*.png
+%{_datadir}/mimelnk/bluetooth
+# XXX: dup (apps/kdebluetooth/*)
+%{_datadir}/apps/*/*
+%{_datadir}/config/*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libqobex.so
 %{_libdir}/libqobex.la
-%{_includedir}/qobex/*.h
+%{_includedir}/qobex
