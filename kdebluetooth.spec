@@ -24,8 +24,8 @@ BuildRequires:	lockdev-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	openobex-devel >= 1.0.0
 BuildRequires:	qt-devel >= 3.1
-BuildRequires:	xrender-devel
 BuildRequires:	xmms-devel
+BuildRequires:	xrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
