@@ -35,7 +35,7 @@ enabled phones and PDAs as straightforward as possible
 
 %description -l pl
 Projekt KDE Bluetooth jest zestawem narzêdzi zbudowanych na górnej
-warstiwe stosu Bluetooth BlueZ. Jego celem jest dostarczenie ³atwego
+warstwie stosu Bluetooth BlueZ. Jego celem jest dostarczenie ³atwego
 dostêpu do wiêkszo¶ci profili Bluetooth oraz wymiany danych z
 telefonami komórkowymi z Bluetooth oraz PDA tak bezpo¶rednio jak to
 jest mo¿liwe.
