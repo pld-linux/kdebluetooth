@@ -21,6 +21,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	lockdev-devel
+BuildRequires:	kdelibs-devel
 BuildRequires:	openobex-devel >= 1.0.0
 BuildRequires:	qt-devel >= 3.1
 BuildRequires:	xrender-devel
