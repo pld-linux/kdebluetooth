@@ -4,16 +4,17 @@
 # * make it kdeextragears, not kdebluetooth-only 
 # * breqs
 # * fix files
-%define		snap	040410
+%define		snap	050226
 
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
-Version:	0.1.%{snap}
-Release:	0.1
+Version:	3.3
+Release:	0.%{snap}.1
 License:	GPL
 Group:		X11/Applications
-Source0:	kdeextragear-3-%{snap}.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/unstable/snapshots/kdeextragear-3-%{snap}.tar.bz2	
+# Source0-md5:	6632e85a06facf2e6be6317cd60ce585
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -49,7 +50,7 @@ Header files for kdebluetooth libraries.
 Pliki nag³ówkowe bibliotek kdebluetooth.
 
 %prep
-%setup -q -n kdeextragear-3
+%setup -q -n kdeextragear-3-%{snap}
 
 %build
 %{__make} -f Makefile.cvs
