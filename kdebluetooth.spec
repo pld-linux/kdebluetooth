@@ -1,16 +1,13 @@
 #
 # TODO:
-# * applnk->vfolders
 # * make it kdeextragears, not kdebluetooth-only
-# * breqs
-# * fix files
-
+# * s/Network/"Network/Bluetooth"? 
 %define		ver	3.3.2
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	3.3.2
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	kdeextragear-3-%{ver}.tar.bz2
@@ -78,8 +75,15 @@ cd kdebluetooth
 	k3bsetup2dir=%{_desktopdir}/kde \
 	kde_htmldir=%{_kdedocdir}
 
-# XXX: desktopdir is _FLAT_
-mv $RPM_BUILD_ROOT{%{_datadir}/applnk,%{_desktopdir}}
+install -d $RPM_BUILD_ROOT%{_desktopdir}
+for www in {Application/kbtobexsrv.desktop,Settings/Network/Bluetooth/kcm_kbluetoothd.desktop,Settings/Peripherals/obex.desktop,System/kbluetoothd.desktop,Utilities/*.desktop};
+ do
+  mv -f $RPM_BUILD_ROOT%{_datadir}/applnk/$www $RPM_BUILD_ROOT%{_desktopdir}/
+done
+for www in {kbtobexsrv.desktop,kcm_kbluetoothd.desktop,obex.desktop,kbluetoothd.desktop,dunhandler.desktop,kbthandsfree.desktop,kbtserialchat.desktop,faxhandler.desktop,kbtobexclient.desktop,kbemusedsrv.desktop,kbtobexsrv.desktop};
+ do
+   echo "Categories=Qt;KDE;Network" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,15 +103,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/kde3/kio_*.la
 %dir %{_libdir}/kdebluetooth
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
-%{_datadir}/apps/konqueror/servicemenus/*.desktop
-%{_datadir}/apps/kdebluetooth
+%{_iconsdir}/*/*/*/*.png
 %{_desktopdir}/*.desktop
 %{_datadir}/servicetypes/*
 %{_datadir}/services/*
 %{_datadir}/sounds/*
-%{_iconsdir}/*/*/*/*.png
 %{_datadir}/mimelnk/bluetooth
-# XXX: BROKEN (duplicates above %{_datadir}/apps/...)
 %{_datadir}/apps/*/*
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
