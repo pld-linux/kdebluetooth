@@ -7,7 +7,7 @@ Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
-Release:	0.%{_beta}.1
+Release:	0.%{_beta}.2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -46,7 +46,7 @@ jest mo¿liwe.
 Summary:	Header files for kdebluetooth libraries
 Summary(pl):	Pliki nag³ówkowe bibliotek kdebluetooth
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	bluez-libs-devel
 Requires:	kdelibs-devel
 # when no baudboy.h interface
