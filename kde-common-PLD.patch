@@ -1,5 +1,5 @@
---- kde-common/admin/acinclude.m4.in.orig	2005-04-28 18:09:13.000000000 +0200
-+++ kde-common/admin/acinclude.m4.in	2005-04-29 19:47:39.000000000 +0200
+--- kdelibs/admin/acinclude.m4.in.orig	2005-06-20 14:13:25.000000000 +0200
++++ kdelibs/admin/acinclude.m4.in	2005-06-20 15:08:08.000000000 +0200
 @@ -428,7 +428,7 @@
  if test "$1" = "default"; then
  
@@ -9,15 +9,18 @@
    fi
    if test -z "$kde_appsdir"; then
      kde_appsdir='\${datadir}/applnk'
-@@ -2908,41 +2908,6 @@
-   fi
- ])
+@@ -2907,41 +2907,6 @@
  
--
--AC_DEFUN([KDE_CHECK_FOR_BAD_COMPILER],
--[
+ AC_DEFUN([KDE_CHECK_FOR_BAD_COMPILER],
+ [
 -  AC_MSG_CHECKING([whether $CC is blacklisted])
 -
+-  dnl In theory we have tu run this test against $CC and $CXX
+-  dnl in C and in C++ mode, because its perfectly legal for
+-  dnl the user to mix compiler versions, since C has a defined
+-  dnl ABI. 
+-  dnl 
+-  dnl For now, we assume the user is not on crack.
 -
 -  AC_TRY_COMPILE([
 -#ifdef __GNUC__
@@ -45,13 +48,10 @@
 -
 -])
 -fi
--
--])
--
- dnl AC_VALIDIFY_CXXFLAGS checks for forbidden flags the user may have given
- AC_DEFUN([AC_VALIDIFY_CXXFLAGS],
- [dnl
-@@ -3052,8 +3017,6 @@
+ 
+ ])
+ 
+@@ -3054,8 +3019,6 @@
  
    AC_PROG_CXX
  
@@ -60,7 +60,7 @@
    if test "$GXX" = "yes" || test "$CXX" = "KCC"; then
      if test "$kde_use_debug_code" != "no"; then
        if test "$CXX" = "KCC"; then
-@@ -4396,9 +4359,9 @@
+@@ -4403,9 +4366,9 @@
    LIBPYTHON=-lpython$version
  fi
  
@@ -72,14 +72,15 @@
    python_moddir=no
  fi
  
-@@ -4545,32 +4508,11 @@
+@@ -4552,32 +4515,11 @@
  [
      AC_MSG_CHECKING([for utmp file])
  
 -    AC_CACHE_VAL(kde_cv_utmp_file,
 -    [
 -    kde_cv_utmp_file=no
--
++    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
+ 
 -    for ac_file in    \
 -                      \
 -	/var/run/utmp \
@@ -93,8 +94,7 @@
 -     fi
 -    done
 -    ])
-+    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
- 
+-
 -    if test "$kde_cv_utmp_file" != "no"; then
 -	AC_DEFINE_UNQUOTED(UTMP, "$kde_cv_utmp_file", [Define the file for utmp entries])
 -	$1
@@ -109,7 +109,7 @@
  ])
  
  
-@@ -5353,7 +5295,7 @@
+@@ -5360,7 +5302,7 @@
    kde_qtdir="$with_qt_dir"
  fi
  
