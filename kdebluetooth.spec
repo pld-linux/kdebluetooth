@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/kde3/kio_*.la
 %dir %{_libdir}/kdebluetooth
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
-%{_iconsdir}/*/*/*/*.png
+%{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/crystalsvg/scalable/apps/kdebluetooth.svgz
 %{_desktopdir}/*.desktop
 %{_datadir}/apps/kbluetoothd
