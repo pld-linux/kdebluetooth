@@ -1,5 +1,5 @@
---- kde-common/admin/acinclude.m4.in.orig	2005-03-30 13:39:59.000000000 +0200
-+++ kde-common/admin/acinclude.m4.in	2005-04-13 18:34:46.747977880 +0200
+--- kdelibs/admin/acinclude.m4.in.orig	2005-06-20 14:13:25.000000000 +0200
++++ kdelibs/admin/acinclude.m4.in	2005-06-20 15:08:08.000000000 +0200
 @@ -428,7 +428,7 @@
  if test "$1" = "default"; then
  
@@ -9,7 +9,58 @@
    fi
    if test -z "$kde_appsdir"; then
      kde_appsdir='\${datadir}/applnk'
-@@ -4364,9 +4364,9 @@
+@@ -2907,41 +2907,6 @@
+ 
+ AC_DEFUN([KDE_CHECK_FOR_BAD_COMPILER],
+ [
+-  AC_MSG_CHECKING([whether $CC is blacklisted])
+-
+-  dnl In theory we have tu run this test against $CC and $CXX
+-  dnl in C and in C++ mode, because its perfectly legal for
+-  dnl the user to mix compiler versions, since C has a defined
+-  dnl ABI. 
+-  dnl 
+-  dnl For now, we assume the user is not on crack.
+-
+-  AC_TRY_COMPILE([
+-#ifdef __GNUC__
+-#if __GNUC__ == 4 && __GNUC_MINOR__ == 0 && __GNUC_PATCHLEVEL__ == 0
+-choke me
+-#endif
+-#endif
+-], ,
+-  kde_bad_compiler=no, 
+-  kde_bad_compiler=yes
+-)
+-
+-  AC_MSG_RESULT($kde_bad_compiler)
+-
+-if test "$kde_bad_compiler" = "yes"; then
+-  AC_MSG_ERROR([
+-
+-This particular compiler version is blacklisted because it
+-is known to miscompile KDE. Please use a newer version, or
+-if that is not yet available, choose an older version. 
+-
+-Please do not report a bug or bother us reporting this
+-configure error. We know about it, and we introduced
+-it by intention to avoid untraceable bugs or crashes in KDE.
+-
+-])
+-fi
+ 
+ ])
+ 
+@@ -3054,8 +3019,6 @@
+ 
+   AC_PROG_CXX
+ 
+-  KDE_CHECK_FOR_BAD_COMPILER
+-
+   if test "$GXX" = "yes" || test "$CXX" = "KCC"; then
+     if test "$kde_use_debug_code" != "no"; then
+       if test "$CXX" = "KCC"; then
+@@ -4403,9 +4366,9 @@
    LIBPYTHON=-lpython$version
  fi
  
@@ -21,14 +72,15 @@
    python_moddir=no
  fi
  
-@@ -4513,32 +4513,11 @@
+@@ -4552,32 +4515,11 @@
  [
      AC_MSG_CHECKING([for utmp file])
  
 -    AC_CACHE_VAL(kde_cv_utmp_file,
 -    [
 -    kde_cv_utmp_file=no
--
++    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
+ 
 -    for ac_file in    \
 -                      \
 -	/var/run/utmp \
@@ -42,8 +94,7 @@
 -     fi
 -    done
 -    ])
-+    AC_CACHE_VAL(kde_cv_utmp_file, [kde_cv_utmp_file=/var/run/utmpx])
- 
+-
 -    if test "$kde_cv_utmp_file" != "no"; then
 -	AC_DEFINE_UNQUOTED(UTMP, "$kde_cv_utmp_file", [Define the file for utmp entries])
 -	$1
@@ -58,7 +109,7 @@
  ])
  
  
-@@ -5321,7 +5300,7 @@
+@@ -5360,7 +5302,7 @@
    kde_qtdir="$with_qt_dir"
  fi
  
