@@ -7,7 +7,7 @@ Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
-Release:	0.%{_beta}.4
+Release:	0.%{_beta}.5
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -111,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/kdebluetooth
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
 %{_iconsdir}/hicolor/*/*/*.png
-%{_iconsdir}/crystalsvg/scalable/apps/kdebluetooth.svgz
+%{_iconsdir}/crystalsvg/*/apps/*.*
 %{_desktopdir}/*.desktop
 %{_datadir}/apps/kbluetoothd
 %{_datadir}/apps/kbtobexclient
