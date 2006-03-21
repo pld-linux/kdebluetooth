@@ -1,18 +1,21 @@
 #
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
-# * s/Network/"Network/Bluetooth"? 
+# * Killing gtk+ & xmms-libs deps?
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
-Release:	0.%{_beta}.5
+Release:	0.%{_beta}.6
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
 # Source0-md5:	11244d5acf07a79e04a447ff2a3bccdf
+Source1:	kde-settings-network-bluetooth.menu
+Source2:	network-bluetooth.menu
+Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -24,7 +27,9 @@ BuildRequires:	lockdev-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	openobex-devel >= 1.0.0
 BuildRequires:	qt-devel >= 3.1
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
+BuildRequires:  sed >= 4.0
 BuildRequires:	xmms-devel
 BuildRequires:	xrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -60,37 +65,49 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 
 %prep
 %setup -q -n %{name}-%{version}_%{_beta}
+%patch0 -p1
 
 %build
-%{__make} -f Makefile.cvs
+cp %{_datadir}/automake/config.sub admin
+%{__make} -f admin/Makefile.common cvs
+
 %configure \
 	--%{!?debug:dis}%{?debug:en}able-debug \
-	--disable-rpath \
+	%{!?debug:--disable-rpath} \
 	--with-bluetooth-libraries=%{_libdir} \
-	--with-qt-libraries=%{_libdir} \
-	%{!?with_setup:--with-k3bsetup=no}
-cd kdebluetooth
+	--with-qt-libraries=%{_libdir}
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C kdebluetooth install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	appsdir=%{_desktopdir}/kde \
-	k3bsetup2dir=%{_desktopdir}/kde \
 	kde_htmldir=%{_kdedocdir}
 
-install -d $RPM_BUILD_ROOT%{_desktopdir}
-for www in Settings/Peripherals/obex.desktop Utilities/*.desktop;
-do
-	mv -f $RPM_BUILD_ROOT%{_datadir}/applnk/$www $RPM_BUILD_ROOT%{_desktopdir}
+install -d $RPM_BUILD_ROOT/etc/xdg/menus/applications-merged
+install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/etc/xdg/menus/applications-merged
+
+cp $RPM_BUILD_ROOT%{_datadir}/desktop-directories/{kde-settings-,}network-bluetooth.directory
+
+mv $RPM_BUILD_ROOT%{_datadir}/applnk/Settings/Peripherals/obex.desktop \
+	$RPM_BUILD_ROOT%{_desktopdir}/kde
+echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
+	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop	
+
+for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kcm_*.desktop; do
+	sed -i 's/Categories=Qt;KDE;X-KDE-settings-network/&-bluetooth/' $f
 done
-mv -f $RPM_BUILD_ROOT%{_desktopdir}/kde/*.desktop $RPM_BUILD_ROOT%{_desktopdir}
-for www in {dunhandler,faxhandler,kbemusedsrv,kbluetoothd,kbtobexclient,kbtobexsrv,kbtserialchat,kcm_btpaired,kcm_kbluetoothd,obex}.desktop;
-do
- echo "Categories=Qt;KDE;Network;" >>$RPM_BUILD_ROOT%{_desktopdir}/$www
+
+for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kb*.desktop; do
+	sed -i 's/Categories=.*/Categories=Qt;KDE;X-bluetooth;/' $f
 done
+
+sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon/' \
+	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
+
+%find_lang %{name}    --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,35 +115,39 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README
+/etc/xdg/menus/applications-merged/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/libqobex.so.*.*.*
-%attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kcm_*.la
-%attr(755,root,root) %{_libdir}/kde3/kio_*.so
+%attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
+%attr(755,root,root) %{_libdir}/kde3/kio_*.so
 %dir %{_libdir}/kdebluetooth
 %attr(755,root,root) %{_libdir}/kdebluetooth/*
-%{_iconsdir}/hicolor/*/*/*.png
-%{_iconsdir}/crystalsvg/*/apps/*.*
-%{_desktopdir}/*.desktop
+%{_datadir}/applnk/.hidden/*
 %{_datadir}/apps/kbluetoothd
 %{_datadir}/apps/kbtobexclient
 %dir %{_datadir}/apps/kdebluetooth
-%{_datadir}/apps/kdebluetooth/dunhandler
-%{_datadir}/apps/kdebluetooth/faxhandler
+%dir %{_datadir}/apps/kdebluetooth/dunhandler
+%attr(755,root,root) %{_datadir}/apps/kdebluetooth/dunhandler/dunhandler
+%dir %{_datadir}/apps/kdebluetooth/faxhandler
+%attr(755,root,root) %{_datadir}/apps/kdebluetooth/faxhandler/faxhandler
+%attr(755,root,root) %{_datadir}/apps/kdebluetooth/faxhandler/kbtfax
 %{_datadir}/apps/kdebluetooth/job-templates
 %{_datadir}/apps/konqsidebartng/virtual_folders/services/*.desktop
 %{_datadir}/apps/konqueror/servicemenus/*.desktop
-%{_datadir}/servicetypes/*
-%{_datadir}/services/*
-%{_datadir}/mimelnk/bluetooth
+%{_datadir}/autostart/kbluetoothd.autostart.desktop
 %{_datadir}/config/*
 %{_datadir}/desktop-directories/*
-%{_datadir}/autostart/kbluetoothd.autostart.desktop
+%{_datadir}/mimelnk/bluetooth
+%{_datadir}/services/*
+%{_datadir}/servicetypes/*
+%{_desktopdir}/kde/*.desktop
+%{_iconsdir}/[!l]*/*/*/*.*
 
 %files devel
 %defattr(644,root,root,755)
