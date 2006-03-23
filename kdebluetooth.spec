@@ -16,6 +16,7 @@ Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar
 Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
 Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
+Patch1:		%{name}-nolibsdp.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -66,6 +67,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %prep
 %setup -q -n %{name}-%{version}_%{_beta}
 %patch0 -p1
+%patch1 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
