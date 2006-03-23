@@ -7,7 +7,7 @@ Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
-Release:	0.%{_beta}.6
+Release:	0.%{_beta}.7
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
