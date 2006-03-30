@@ -32,7 +32,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:  sed >= 4.0
 BuildRequires:	xmms-devel
-BuildRequires:	xrender-devel
+BuildRequires:	xorg-lib-libXrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
