@@ -106,7 +106,7 @@ for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kb*.desktop; do
 	sed -i 's/Categories=.*/Categories=Qt;KDE;X-bluetooth;/' $f
 done
 
-sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon/' \
+sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
 
 %find_lang %{name}    --with-kde
