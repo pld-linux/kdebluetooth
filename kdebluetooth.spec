@@ -7,7 +7,7 @@ Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
-Release:	0.%{_beta}.7
+Release:	0.%{_beta}.8
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -17,6 +17,7 @@ Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
 Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch1:		%{name}-nolibsdp.patch
+Patch2:		%{name}-gcc.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -26,6 +27,7 @@ BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	lockdev-devel
 BuildRequires:	kdelibs-devel
+BuildRequires:	kdepim-devel
 BuildRequires:	openobex-devel >= 1.0.0
 BuildRequires:	qt-devel >= 3.1
 BuildRequires:	rpm-pythonprov
@@ -68,6 +70,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %setup -q -n %{name}-%{version}_%{_beta}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -124,6 +127,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/libqobex.so.*.*.*
+%{_libdir}/libirmcsynckonnector.la
+%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
 %{_libdir}/kde3/kcm_*.la
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
