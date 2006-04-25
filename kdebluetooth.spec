@@ -17,7 +17,7 @@ Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
 Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch1:		%{name}-nolibsdp.patch
-Patch2:		%{name}-gcc.patch
+Patch2:		%{name}-debian.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
