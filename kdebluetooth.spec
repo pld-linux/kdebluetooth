@@ -34,7 +34,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:  sed >= 4.0
 BuildRequires:	xmms-devel
-BuildRequires:	xorg-lib-libXrender-devel
+BuildRequires:	xrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
