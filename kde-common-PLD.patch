@@ -1,5 +1,6 @@
---- kdelibs/admin/acinclude.m4.in.orig	2005-06-20 14:13:25.000000000 +0200
-+++ kdelibs/admin/acinclude.m4.in	2005-06-20 15:08:08.000000000 +0200
+diff -urN kdelibs-3.5.3.or/admin/acinclude.m4.in kdelibs-3.5.3/admin/acinclude.m4.in
+--- kdelibs-3.5.3.or/admin/acinclude.m4.in	2006-05-23 13:02:06.000000000 +0000
++++ kdelibs-3.5.3/admin/acinclude.m4.in	2006-07-01 14:55:49.345359250 +0000
 @@ -428,7 +428,7 @@
  if test "$1" = "default"; then
  
@@ -9,7 +10,7 @@
    fi
    if test -z "$kde_appsdir"; then
      kde_appsdir='\${datadir}/applnk'
-@@ -2907,41 +2907,6 @@
+@@ -2977,41 +2977,6 @@
  
  AC_DEFUN([KDE_CHECK_FOR_BAD_COMPILER],
  [
@@ -51,7 +52,7 @@
  
  ])
  
-@@ -3054,8 +3019,6 @@
+@@ -3153,8 +3118,6 @@
  
    AC_PROG_CXX
  
@@ -60,7 +61,7 @@
    if test "$GXX" = "yes" || test "$CXX" = "KCC"; then
      if test "$kde_use_debug_code" != "no"; then
        if test "$CXX" = "KCC"; then
-@@ -4403,9 +4366,9 @@
+@@ -4579,9 +4542,9 @@
    LIBPYTHON=-lpython$version
  fi
  
@@ -72,7 +73,7 @@
    python_moddir=no
  fi
  
-@@ -4552,32 +4515,11 @@
+@@ -4728,32 +4691,11 @@
  [
      AC_MSG_CHECKING([for utmp file])
  
@@ -109,7 +110,7 @@
  ])
  
  
-@@ -5360,7 +5302,7 @@
+@@ -5536,7 +5478,7 @@
    kde_qtdir="$with_qt_dir"
  fi
  
@@ -118,3 +119,24 @@
  AC_MSG_RESULT($QTDOCDIR)
  
  AC_SUBST(QTDOCDIR)
+diff -urN kdelibs-3.5.3.or/admin/cvs.sh kdelibs-3.5.3/admin/cvs.sh
+--- kdelibs-3.5.3.or/admin/cvs.sh	2006-05-23 13:02:06.000000000 +0000
++++ kdelibs-3.5.3/admin/cvs.sh	2006-07-01 14:57:24.295293250 +0000
+@@ -32,7 +32,7 @@
+ required_autoconf_version="2.53 or newer"
+ AUTOCONF_VERSION=`$AUTOCONF --version | head -n 1`
+ case $AUTOCONF_VERSION in
+-  Autoconf*2.5* | autoconf*2.5* ) : ;;
++  Autoconf*2.5* | autoconf*2.5* | Autoconf*2.6* | autoconf*2.6* ) : ;;
+   "" )
+     echo "*** AUTOCONF NOT FOUND!."
+     echo "*** KDE requires autoconf $required_autoconf_version"
+@@ -47,7 +47,7 @@
+ 
+ AUTOHEADER_VERSION=`$AUTOHEADER --version | head -n 1`
+ case $AUTOHEADER_VERSION in
+-  Autoconf*2.5* | autoheader*2.5* ) : ;;
++  Autoconf*2.5* | autoheader*2.5* | Autoconf*2.6* | autoheader*2.6* ) : ;;
+   "" )
+     echo "*** AUTOHEADER NOT FOUND!."
+     echo "*** KDE requires autoheader $required_autoconf_version"
