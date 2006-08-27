@@ -18,6 +18,7 @@ Source2:	network-bluetooth.menu
 Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch1:		%{name}-nolibsdp.patch
 Patch2:		%{name}-debian.patch
+Patch3:		kde-ac260.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -71,6 +72,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
