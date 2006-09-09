@@ -7,7 +7,7 @@ Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 %define		_beta	beta1
-Release:	0.%{_beta}.10
+Release:	0.%{_beta}.11
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -19,6 +19,7 @@ Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch1:		%{name}-nolibsdp.patch
 Patch2:		%{name}-debian.patch
 Patch3:		kde-ac260.patch
+Patch4:		kde-ac260-lt.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -73,6 +74,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
