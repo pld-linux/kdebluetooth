@@ -1,0 +1,10 @@
+--- kdebluetooth/kbluetoothd/kbluetoothd/sdprecord.h~	2005-03-20 16:46:48.000000000 +0000
++++ kdebluetooth/kbluetoothd/kbluetoothd/sdprecord.h	2006-09-10 10:19:12.944616750 +0000
+@@ -18,6 +18,7 @@
+ #include <qmap.h>
+ #include <qcstring.h>
+ #include <bluetooth/sdp.h>
++#include <bluetooth/sdp_lib.h>
+ 
+ class QDomDocument;
+ class QDomElement;
