@@ -1,4 +1,3 @@
-diff -urN kdelibs-3.5.3.or/admin/acinclude.m4.in kdelibs-3.5.3/admin/acinclude.m4.in
 --- kdelibs-3.5.3.or/admin/acinclude.m4.in	2006-05-23 13:02:06.000000000 +0000
 +++ kdelibs-3.5.3/admin/acinclude.m4.in	2006-07-01 14:55:49.345359250 +0000
 @@ -428,7 +428,7 @@
@@ -120,3 +119,17 @@ diff -urN kdelibs-3.5.3.or/admin/acinclude.m4.in kdelibs-3.5.3/admin/acinclude.m
  
  AC_SUBST(QTDOCDIR)
 
+--- kdelibs-3.5.4/admin/am_edit	2006-07-24 10:18:33.000000000 +0300
++++ kdepim-3.5.4/admin/am_edit	2006-09-19 14:20:21.446444147 +0300
+@@ -499,6 +498,11 @@
+         }
+     }
+ 
++    $lookup = '(CXXLINK = \$\(LIBTOOL\) --tag=CXX --mode=link) \$\(CXXLD\)';
++    if ($MakefileData =~ m/$lookup/) {
++        substituteLine($lookup, "$1 \"\$\(CXXLD\)\"");
++    }
++
+     $MakefileData =~ s/\$\(KCXXFLAGS\)/\$\(CXXFLAGS\)/g;
+ 
+     $lookup = '(.*)cp -pr \$\$/\$\$file \$\(distdir\)/\$\$file(.*)';
