@@ -118,10 +118,9 @@
  AC_MSG_RESULT($QTDOCDIR)
  
  AC_SUBST(QTDOCDIR)
-
---- kdelibs-3.5.4/admin/am_edit	2006-07-24 10:18:33.000000000 +0300
-+++ kdepim-3.5.4/admin/am_edit	2006-09-19 14:20:21.446444147 +0300
-@@ -499,6 +498,11 @@
+--- kdepim-3.5.4/admin/am_edit	2006-09-19 14:20:21.446444147 +0300
++++ kdepim-3.5.4/admin/am_edit	2006-09-20 00:14:49.967386769 +0300
+@@ -498,6 +498,11 @@
          }
      }
  
@@ -133,3 +132,18 @@
      $MakefileData =~ s/\$\(KCXXFLAGS\)/\$\(CXXFLAGS\)/g;
  
      $lookup = '(.*)cp -pr \$\$/\$\$file \$\(distdir\)/\$\$file(.*)';
+@@ -573,6 +578,14 @@
+         local @kde_options = split(/[\034\s]+/, $kde_options_str);
+         if (grep(/^foreign$/, @kde_options)) {
+             push(@foreignfiles, $makefileDir . "/");
++
++            # always do this. don't care if it's foreign file. we *need* CXXLD quoted for libtool argument.
++            $lookup = '(CXXLINK = \$\(LIBTOOL\).*--mode=link) \$\(CXXLD\)';
++            if ($MakefileData =~ m/$lookup/) {
++                substituteLine($lookup, "$1 \"\$\(CXXLD\)\"");
++                updateMakefile ();
++            }
++
+             return 0; # don't touch me
+         }
+         for $opt (@kde_options) {
