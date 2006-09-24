@@ -118,13 +118,13 @@
  AC_MSG_RESULT($QTDOCDIR)
  
  AC_SUBST(QTDOCDIR)
---- kdepim-3.5.4/admin/am_edit	2006-09-19 14:20:21.446444147 +0300
-+++ kdepim-3.5.4/admin/am_edit	2006-09-20 00:14:49.967386769 +0300
-@@ -498,6 +498,11 @@
+--- kdelibs-3.5.4/admin/am_edit	2006-07-24 10:18:33.000000000 +0300
++++ gwenview-1.4.0/admin/am_edit	2006-09-25 00:04:55.213036950 +0300
+@@ -499,6 +499,11 @@
          }
      }
  
-+    $lookup = '(CXXLINK = \$\(LIBTOOL\) --tag=CXX --mode=link) \$\(CXXLD\)';
++    $lookup = '(CXXLINK = \$\(LIBTOOL\) --mode=link --tag=CXX) \$\(CXXLD\)';
 +    if ($MakefileData =~ m/$lookup/) {
 +        substituteLine($lookup, "$1 \"\$\(CXXLD\)\"");
 +    }
@@ -132,7 +132,7 @@
      $MakefileData =~ s/\$\(KCXXFLAGS\)/\$\(CXXFLAGS\)/g;
  
      $lookup = '(.*)cp -pr \$\$/\$\$file \$\(distdir\)/\$\$file(.*)';
-@@ -573,6 +578,14 @@
+@@ -578,6 +583,14 @@
          local @kde_options = split(/[\034\s]+/, $kde_options_str);
          if (grep(/^foreign$/, @kde_options)) {
              push(@foreignfiles, $makefileDir . "/");
