@@ -6,22 +6,18 @@ Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-%define		_beta	beta1
-Release:	0.%{_beta}.12
+%define		_beta	beta2
+Release:	0.%{_beta}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
-# Source0-md5:	11244d5acf07a79e04a447ff2a3bccdf
+# Source0-md5:	3c9b2c4800d8ef0b92dcc481fd9c62c9
 Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
 Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch1:		%{name}-nolibsdp.patch
-Patch2:		%{name}-debian.patch
-Patch3:		kde-ac260.patch
-Patch4:		kde-ac260-lt.patch
-Patch5:		%{name}-openobex.patch
-Patch6:		%{name}-sdp.patch
+Patch2:		kde-ac260-lt.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -76,10 +72,6 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p0
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -121,7 +113,24 @@ done
 sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
 
-%find_lang %{name}    --with-kde
+rm -f *.lang
+echo > %{name}.lang
+
+for lang in \
+	btpaired \
+	kbluelock \
+	kbluepin \
+	kbluetoothdcm \
+	kbluetoothd \
+	kbtobexclient \
+	kbtsearch \
+	kbtserialchat \
+	khciconfig \
+	kioclient \
+	libkbluetooth; do
+		%find_lang ${lang} --with-kde
+		cat ${lang}.lang >> %{name}.lang
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -135,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 /etc/xdg/menus/applications-merged/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/libqobex.so.*.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 %{_libdir}/libirmcsynckonnector.la
 %attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
 %{_libdir}/kde3/kcm_*.la
@@ -167,6 +176,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libqobex.so
-%{_libdir}/libqobex.la
+%attr(755,root,root) %{_libdir}/*.so
+%{_libdir}/*.la
 %{_includedir}/qobex
+%{_includedir}/%{name}
+%exclude %{_libdir}/libirmcsynckonnector.la
+%exclude %{_libdir}/libirmcsynckonnector.so
