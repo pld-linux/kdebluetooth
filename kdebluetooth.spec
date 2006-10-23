@@ -2,11 +2,11 @@
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
 # * Killing gtk+ & xmms-libs deps?
+%define		_beta	beta2
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-%define		_beta	beta2
 Release:	0.%{_beta}.1
 Epoch:		1
 License:	GPL
@@ -15,19 +15,20 @@ Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar
 # Source0-md5:	3c9b2c4800d8ef0b92dcc481fd9c62c9
 Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
-Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
-Patch1:		%{name}-nolibsdp.patch
-Patch2:		kde-ac260-lt.patch
+Patch0:		kde-common-PLD.patch
+Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
+Patch2:		%{name}-nolibsdp.patch
+Patch3:		kde-ac260-lt.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
 BuildRequires:	gettext-devel
+BuildRequires:	kdelibs-devel
+BuildRequires:	kdepim-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	lockdev-devel
-BuildRequires:	kdelibs-devel
-BuildRequires:	kdepim-devel
 BuildRequires:	openobex-devel >= 1.3-2
 BuildRequires:	pkgconfig
 BuildRequires:	qt-devel >= 3.1
@@ -72,6 +73,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -100,7 +102,7 @@ cp $RPM_BUILD_ROOT%{_datadir}/desktop-directories/{kde-settings-,}network-blueto
 mv $RPM_BUILD_ROOT%{_datadir}/applnk/Settings/Peripherals/obex.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
 echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
-	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop	
+	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop
 
 for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kcm_*.desktop; do
 	sed -i 's/Categories=Qt;KDE;X-KDE-settings-network/&-bluetooth/' $f
