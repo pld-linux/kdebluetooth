@@ -2,37 +2,39 @@
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
 # * Killing gtk+ & xmms-libs deps?
+%define		_beta	beta2
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-%define		_beta	beta1
-Release:	0.%{_beta}.9
+Release:	0.%{_beta}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
-# Source0-md5:	11244d5acf07a79e04a447ff2a3bccdf
+# Source0-md5:	3c9b2c4800d8ef0b92dcc481fd9c62c9
 Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
-Patch0:		%{name}-dun_and_fax_handler-desktopfiles.patch
-Patch1:		%{name}-nolibsdp.patch
-Patch2:		%{name}-debian.patch
+Patch0:		kde-common-PLD.patch
+Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
+Patch2:		%{name}-nolibsdp.patch
+Patch3:		kde-ac260-lt.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
 BuildRequires:	gettext-devel
+BuildRequires:	kdelibs-devel
+BuildRequires:	kdepim-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	lockdev-devel
-BuildRequires:	kdelibs-devel
-BuildRequires:	kdepim-devel
-BuildRequires:	openobex-devel >= 1.0.0
+BuildRequires:	openobex-devel >= 1.3-2
+BuildRequires:	pkgconfig
 BuildRequires:	qt-devel >= 3.1
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
-BuildRequires:  sed >= 4.0
+BuildRequires:	sed >= 4.0
 BuildRequires:	xmms-devel
 BuildRequires:	xrender-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,6 +73,7 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -99,7 +102,7 @@ cp $RPM_BUILD_ROOT%{_datadir}/desktop-directories/{kde-settings-,}network-blueto
 mv $RPM_BUILD_ROOT%{_datadir}/applnk/Settings/Peripherals/obex.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
 echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
-	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop	
+	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop
 
 for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kcm_*.desktop; do
 	sed -i 's/Categories=Qt;KDE;X-KDE-settings-network/&-bluetooth/' $f
@@ -112,7 +115,24 @@ done
 sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
 
-%find_lang %{name}    --with-kde
+rm -f *.lang
+echo > %{name}.lang
+
+for lang in \
+	btpaired \
+	kbluelock \
+	kbluepin \
+	kbluetoothdcm \
+	kbluetoothd \
+	kbtobexclient \
+	kbtsearch \
+	kbtserialchat \
+	khciconfig \
+	kioclient \
+	libkbluetooth; do
+		%find_lang ${lang} --with-kde
+		cat ${lang}.lang >> %{name}.lang
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -126,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 /etc/xdg/menus/applications-merged/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/libqobex.so.*.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 %{_libdir}/libirmcsynckonnector.la
 %attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
 %{_libdir}/kde3/kcm_*.la
@@ -158,6 +178,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libqobex.so
-%{_libdir}/libqobex.la
+%attr(755,root,root) %{_libdir}/*.so
+%{_libdir}/*.la
 %{_includedir}/qobex
+%{_includedir}/%{name}
+%exclude %{_libdir}/libirmcsynckonnector.la
+%exclude %{_libdir}/libirmcsynckonnector.so
