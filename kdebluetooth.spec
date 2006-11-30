@@ -3,11 +3,12 @@
 # * make it kdeextragears, not kdebluetooth-only
 # * Killing gtk+ & xmms-libs deps?
 %define		_beta	beta2
+%define		_rel	3
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-Release:	0.%{_beta}.2
+Release:	0.%{_beta}.%{_rel}
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
