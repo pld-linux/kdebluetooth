@@ -2,14 +2,12 @@
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
 # * Killing gtk+ & xmms-libs deps?
-# * get/fix dbus based pin supply
 %define		_beta	beta2
-%define		_rel	3
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-Release:	0.%{_beta}.%{_rel}
+Release:	0.%{_beta}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -21,8 +19,6 @@ Patch0:		kde-common-PLD.patch
 Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch2:		%{name}-nolibsdp.patch
 Patch3:		kde-ac260-lt.patch
-Patch4:         %{name}-automake_version_fix.patch
-# Patch5:         %{name}-dbuspasskeyagent.diff
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -78,10 +74,6 @@ Pliki nag³ówkowe bibliotek kdebluetooth.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-
-# Fix for dbus base pin query - http://lists.opensuse.org/opensuse-commit/2006-11/msg00100.html
-#%%patch5 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
