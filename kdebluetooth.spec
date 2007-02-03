@@ -21,8 +21,8 @@ Patch0:		kde-common-PLD.patch
 Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch2:		%{name}-nolibsdp.patch
 Patch3:		kde-ac260-lt.patch
-Patch4:         kde-am.patch
-# Patch5:         %{name}-dbuspasskeyagent.diff
+Patch4:		kde-am.patch
+# Patch5:	%{name}-dbuspasskeyagent.diff
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
