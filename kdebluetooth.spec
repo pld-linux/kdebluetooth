@@ -4,7 +4,7 @@
 # * Killing gtk+ & xmms-libs deps?
 %define		_beta	beta2
 Summary:	KDE Bluetooth framework
-Summary(pl):	Podstawowe 秗odowisko KDE Bluetooth
+Summary(pl.UTF-8):   Podstawowe 艣rodowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 Release:	0.%{_beta}.1
@@ -45,16 +45,16 @@ Bluetooth stack BlueZ. Its goal is to provide easy access to the most
 common Bluetooth profiles and to make data exchange with Bluetooth
 enabled phones and PDAs as straightforward as possible
 
-%description -l pl
-Projekt KDE Bluetooth jest zestawem narz阣zi zbudowanych na g髍nej
-warstwie stosu Bluetooth BlueZ. Jego celem jest dostarczenie 砤twego
-dost阷u do wi阫szo禼i profili Bluetooth oraz wymiany danych z
-telefonami kom髍kowymi z Bluetooth oraz PDA tak bezpo秗ednio jak to
-jest mo縧iwe.
+%description -l pl.UTF-8
+Projekt KDE Bluetooth jest zestawem narz臋dzi zbudowanych na g贸rnej
+warstwie stosu Bluetooth BlueZ. Jego celem jest dostarczenie 艂atwego
+dost臋pu do wi臋kszo艣ci profili Bluetooth oraz wymiany danych z
+telefonami kom贸rkowymi z Bluetooth oraz PDA tak bezpo艣rednio jak to
+jest mo偶liwe.
 
 %package devel
 Summary:	Header files for kdebluetooth libraries
-Summary(pl):	Pliki nag丑wkowe bibliotek kdebluetooth
+Summary(pl.UTF-8):   Pliki nag艂贸wkowe bibliotek kdebluetooth
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	bluez-libs-devel
@@ -65,8 +65,8 @@ Requires:	lockdev-devel
 %description devel
 Header files for kdebluetooth libraries.
 
-%description devel -l pl
-Pliki nag丑wkowe bibliotek kdebluetooth.
+%description devel -l pl.UTF-8
+Pliki nag艂贸wkowe bibliotek kdebluetooth.
 
 %prep
 %setup -q -n %{name}-%{version}_%{_beta}
