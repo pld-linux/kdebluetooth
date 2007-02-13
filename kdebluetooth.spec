@@ -4,7 +4,7 @@
 # * Killing gtk+ & xmms-libs deps?
 %define		_beta	beta2
 Summary:	KDE Bluetooth framework
-Summary(pl.UTF-8):   Podstawowe środowisko KDE Bluetooth
+Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
 Release:	0.%{_beta}.1
@@ -54,7 +54,7 @@ jest możliwe.
 
 %package devel
 Summary:	Header files for kdebluetooth libraries
-Summary(pl.UTF-8):   Pliki nagłówkowe bibliotek kdebluetooth
+Summary(pl.UTF-8):	Pliki nagłówkowe bibliotek kdebluetooth
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	bluez-libs-devel
