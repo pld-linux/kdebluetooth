@@ -7,7 +7,7 @@ Summary:	KDE Bluetooth framework
 Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-Release:	0.%{_beta}.1
+Release:	0.%{_beta}.2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -19,6 +19,7 @@ Patch0:		kde-common-PLD.patch
 Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch2:		%{name}-nolibsdp.patch
 Patch3:		kde-ac260-lt.patch
+Patch4:		kde-am.patch
 URL:		http://kde-bluetooth.sourceforge.net/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -74,6 +75,7 @@ Pliki nagłówkowe bibliotek kdebluetooth.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -147,8 +149,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*
-%{_libdir}/libirmcsynckonnector.la
-%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
+#%{_libdir}/libirmcsynckonnector.la
+#%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
 %{_libdir}/kde3/kcm_*.la
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
@@ -182,5 +184,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %{_includedir}/qobex
 %{_includedir}/%{name}
-%exclude %{_libdir}/libirmcsynckonnector.la
-%exclude %{_libdir}/libirmcsynckonnector.so
+#%exclude %{_libdir}/libirmcsynckonnector.la
+#%exclude %{_libdir}/libirmcsynckonnector.so
