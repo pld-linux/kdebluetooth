@@ -32,7 +32,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	lockdev-devel
 BuildRequires:	openobex-devel >= 1.3-2
 BuildRequires:	pkgconfig
-BuildRequires:	qt-devel >= 3.1
+BuildRequires:	qt-devel >= 6:3.1
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
