@@ -4,7 +4,7 @@
 # * Killing gtk+ & xmms-libs deps?
 # * get/fix dbus based pin supply
 %define		_beta	beta2
-%define		_rel	3
+%define		_rel	4
 Summary:	KDE Bluetooth framework
 Summary(pl):	Podstawowe ¶rodowisko KDE Bluetooth
 Name:		kdebluetooth
@@ -155,8 +155,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*
-%{_libdir}/libirmcsynckonnector.la
-%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
+#%{_libdir}/libirmcsynckonnector.la
+#%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
 %{_libdir}/kde3/kcm_*.la
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
@@ -190,5 +190,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %{_includedir}/qobex
 %{_includedir}/%{name}
-%exclude %{_libdir}/libirmcsynckonnector.la
-%exclude %{_libdir}/libirmcsynckonnector.so
+#%exclude %{_libdir}/libirmcsynckonnector.la
+#%exclude %{_libdir}/libirmcsynckonnector.so
