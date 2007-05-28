@@ -20,7 +20,7 @@ Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch2:		%{name}-nolibsdp.patch
 Patch3:		kde-ac260-lt.patch
 Patch4:		kde-am.patch
-URL:		http://kde-bluetooth.sourceforge.net/
+URL:		http://bluetooth.kmobiletools.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
