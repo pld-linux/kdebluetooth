@@ -30,6 +30,7 @@ BuildRequires:	kdepim-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	lockdev-devel
+BuildRequires:	obexftp-devel
 BuildRequires:	openobex-devel >= 1.3-2
 BuildRequires:	pkgconfig
 BuildRequires:	qt-devel >= 6:3.1
@@ -106,8 +107,6 @@ mv $RPM_BUILD_ROOT%{_datadir}/applnk/Utilities/dunhandler.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
 mv $RPM_BUILD_ROOT%{_datadir}/applnk/Utilities/faxhandler.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
-#echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
-#	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop
 
 for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kcm_*.desktop; do
 	sed -i 's/Categories=Qt;KDE;X-KDE-settings-network/&-bluetooth/' $f
@@ -134,8 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 /etc/xdg/menus/applications-merged/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*
-#%{_libdir}/libirmcsynckonnector.la
-#%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
 %{_libdir}/kde3/kcm_*.la
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
@@ -161,5 +158,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %dir %{_includedir}/libkbluetooth
 %{_includedir}/libkbluetooth/*.h
-#%exclude %{_libdir}/libirmcsynckonnector.la
-#%exclude %{_libdir}/libirmcsynckonnector.so
