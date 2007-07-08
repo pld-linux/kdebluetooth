@@ -106,8 +106,8 @@ mv $RPM_BUILD_ROOT%{_datadir}/applnk/Utilities/dunhandler.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
 mv $RPM_BUILD_ROOT%{_datadir}/applnk/Utilities/faxhandler.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
-echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
-	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop
+#echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
+#	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop
 
 for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kcm_*.desktop; do
 	sed -i 's/Categories=Qt;KDE;X-KDE-settings-network/&-bluetooth/' $f
@@ -117,8 +117,8 @@ for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kb*.desktop; do
 	sed -i 's/Categories=.*/Categories=Qt;KDE;X-bluetooth;/' $f
 done
 
-#sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
-#	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
+sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
+	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetooth.desktop
 
 #%find_lang %{name} --with-kde
 
@@ -128,7 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files -f %{name}.lang
+%files
 %defattr(644,root,root,755)
 %doc README
 /etc/xdg/menus/applications-merged/*
