@@ -38,6 +38,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	xmms-devel
 BuildRequires:	xorg-lib-libXrender-devel
+Requires:	bluez-utils >= 3.11 
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
