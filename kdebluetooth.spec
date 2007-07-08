@@ -2,17 +2,17 @@
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
 # * Killing gtk+ & xmms-libs deps?
-%define		_beta	beta2
+%define		_beta	beta3
 Summary:	KDE Bluetooth framework
 Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-Release:	0.%{_beta}.3
+Release:	0.%{_beta}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
-# Source0-md5:	3c9b2c4800d8ef0b92dcc481fd9c62c9
+Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}-%{_beta}.tar.bz2
+# Source0-md5:	fd1c45a393b8724fbb0de493e923bcd8
 Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
 Patch0:		kde-common-PLD.patch
@@ -70,12 +70,12 @@ Header files for kdebluetooth libraries.
 Pliki nagłówkowe bibliotek kdebluetooth.
 
 %prep
-%setup -q -n %{name}-%{version}_%{_beta}
+%setup -q -n %{name}-%{version}-%{_beta}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch1 -p1
+#%patch2 -p1
 %patch3 -p1
-%patch4 -p1
+#%patch4 -p1
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -101,7 +101,9 @@ install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/etc/xdg/menus/applications-merged
 
 cp $RPM_BUILD_ROOT%{_datadir}/desktop-directories/{kde-settings-,}network-bluetooth.directory
 
-mv $RPM_BUILD_ROOT%{_datadir}/applnk/Settings/Peripherals/obex.desktop \
+mv $RPM_BUILD_ROOT%{_datadir}/applnk/Utilities/dunhandler.desktop \
+	$RPM_BUILD_ROOT%{_desktopdir}/kde
+mv $RPM_BUILD_ROOT%{_datadir}/applnk/Utilities/faxhandler.desktop \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde
 echo "Categories=Qt;KDE;X-KDE-settings-peripherals;" \
 	>> $RPM_BUILD_ROOT%{_desktopdir}/kde/obex.desktop
@@ -114,27 +116,10 @@ for f in $RPM_BUILD_ROOT%{_desktopdir}/kde/kb*.desktop; do
 	sed -i 's/Categories=.*/Categories=Qt;KDE;X-bluetooth;/' $f
 done
 
-sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
-	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
+#sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
+#	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetoothd.desktop
 
-rm -f *.lang
-echo > %{name}.lang
-
-for lang in \
-	btpaired \
-	kbluelock \
-	kbluepin \
-	kbluetoothdcm \
-	kbluetoothd \
-	kbtobexclient \
-	kbtsearch \
-	kbtserialchat \
-	khciconfig \
-	kioclient \
-	libkbluetooth; do
-		%find_lang ${lang} --with-kde
-		cat ${lang}.lang >> %{name}.lang
-done
+#%find_lang %{name} --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -147,7 +132,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 /etc/xdg/menus/applications-merged/*
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*
 #%{_libdir}/libirmcsynckonnector.la
 #%attr(755,root,root) %{_libdir}/libirmcsynckonnector.so
@@ -155,22 +139,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
 %attr(755,root,root) %{_libdir}/kde3/kio_*.so
-%dir %{_libdir}/kdebluetooth
-%attr(755,root,root) %{_libdir}/kdebluetooth/*
-%{_datadir}/applnk/.hidden/*
-%{_datadir}/apps/kbluetoothd
-%{_datadir}/apps/kbtobexclient
 %dir %{_datadir}/apps/kdebluetooth
 %dir %{_datadir}/apps/kdebluetooth/dunhandler
 %attr(755,root,root) %{_datadir}/apps/kdebluetooth/dunhandler/dunhandler
 %dir %{_datadir}/apps/kdebluetooth/faxhandler
 %attr(755,root,root) %{_datadir}/apps/kdebluetooth/faxhandler/faxhandler
 %attr(755,root,root) %{_datadir}/apps/kdebluetooth/faxhandler/kbtfax
-%{_datadir}/apps/kdebluetooth/job-templates
 %{_datadir}/apps/konqsidebartng/virtual_folders/services/*.desktop
-%{_datadir}/apps/konqueror/servicemenus/*.desktop
-%{_datadir}/autostart/kbluetoothd.autostart.desktop
-%{_datadir}/config/*
+%{_datadir}/autostart/kbluetooth.autostart.desktop
 %{_datadir}/desktop-directories/*
 %{_datadir}/mimelnk/bluetooth
 %{_datadir}/services/*
@@ -182,7 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so
 %{_libdir}/*.la
-%{_includedir}/qobex
-%{_includedir}/%{name}
+%dir %{_includedir}/libkbluetooth
+%{_includedir}/libkbluetooth/*.h
 #%exclude %{_libdir}/libirmcsynckonnector.la
 #%exclude %{_libdir}/libirmcsynckonnector.so
