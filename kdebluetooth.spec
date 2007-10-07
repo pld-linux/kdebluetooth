@@ -2,7 +2,7 @@
 # TODO:
 # * make it kdeextragears, not kdebluetooth-only
 # * Killing gtk+ & xmms-libs deps?
-%define		_beta	beta3
+%define		_beta	beta8
 Summary:	KDE Bluetooth framework
 Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
 Name:		kdebluetooth
@@ -11,8 +11,8 @@ Release:	0.%{_beta}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}-%{_beta}.tar.bz2
-# Source0-md5:	fd1c45a393b8724fbb0de493e923bcd8
+Source0:	http://dl.sourceforge.net/kde-bluetooth/%{name}-%{version}_%{_beta}.tar.bz2
+# Source0-md5:	0b6aebf7d236894fc442d74425b13386
 Source1:	kde-settings-network-bluetooth.menu
 Source2:	network-bluetooth.menu
 Patch0:		kde-common-PLD.patch
@@ -72,7 +72,7 @@ Header files for kdebluetooth libraries.
 Pliki nagłówkowe bibliotek kdebluetooth.
 
 %prep
-%setup -q -n %{name}-%{version}-%{_beta}
+%setup -q -n %{name}-%{version}_%{_beta}
 %patch0 -p1
 #%patch1 -p1
 #%patch2 -p1
