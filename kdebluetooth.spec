@@ -39,7 +39,7 @@ BuildRequires:	rpmbuild(macros) >= 1.129
 BuildRequires:	sed >= 4.0
 BuildRequires:	xmms-devel
 BuildRequires:	xorg-lib-libXrender-devel
-Requires:	bluez-utils >= 3.11 
+Requires:	bluez-utils >= 3.11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -98,8 +98,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir}
 
-install -d $RPM_BUILD_ROOT/etc/xdg/menus/applications-merged
-install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/etc/xdg/menus/applications-merged
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/xdg/menus/applications-merged
+install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/xdg/menus/applications-merged
 
 cp $RPM_BUILD_ROOT%{_datadir}/desktop-directories/{kde-settings-,}network-bluetooth.directory
 
@@ -130,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README
-/etc/xdg/menus/applications-merged/*
+%{_sysconfdir}/xdg/menus/applications-merged/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*
 %{_libdir}/kde3/kcm_*.la
@@ -158,3 +158,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %dir %{_includedir}/libkbluetooth
 %{_includedir}/libkbluetooth/*.h
+%dir %{_includedir}/qobex
+%{_includedir}/qobex/*.h
