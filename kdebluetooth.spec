@@ -1,7 +1,6 @@
-#
 # TODO:
-# * make it kdeextragears, not kdebluetooth-only
-# * Killing gtk+ & xmms-libs deps?
+# - make it kdeextragears, not kdebluetooth-only
+# - Killing gtk+ & xmms-libs deps?
 %define		_beta	beta8
 Summary:	KDE Bluetooth framework
 Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
@@ -24,6 +23,7 @@ URL:		http://bluetooth.kmobiletools.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
+BuildRequires:	dbus-qt-devel
 BuildRequires:	gettext-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	kdepim-devel
@@ -119,7 +119,7 @@ done
 sed -i 's/Categories=Qt;KDE;X-bluetooth;/&TrayIcon;/' \
 	$RPM_BUILD_ROOT%{_desktopdir}/kde/kbluetooth.desktop
 
-#%find_lang %{name} --with-kde
+%find_lang %{name} --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README
 /etc/xdg/menus/applications-merged/*
