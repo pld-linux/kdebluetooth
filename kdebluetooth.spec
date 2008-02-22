@@ -6,7 +6,7 @@ Summary:	KDE Bluetooth framework
 Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-Release:	0.%{_beta}.1
+Release:	0.%{_beta}.2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -137,6 +137,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
 %attr(755,root,root) %{_libdir}/kde3/kio_*.so
+%dir %{_libdir}/kdebluetooth/servers
+%attr(755,root,root) %{_libdir}/kdebluetooth/servers/kbtobexsrv
 %dir %{_datadir}/apps/kdebluetooth
 %dir %{_datadir}/apps/kdebluetooth/dunhandler
 %attr(755,root,root) %{_datadir}/apps/kdebluetooth/dunhandler/dunhandler
