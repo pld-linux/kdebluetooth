@@ -137,6 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/kcm_*.so
 %{_libdir}/kde3/kio_*.la
 %attr(755,root,root) %{_libdir}/kde3/kio_*.so
+%dir %{_libdir}/kdebluetooth
 %dir %{_libdir}/kdebluetooth/servers
 %attr(755,root,root) %{_libdir}/kdebluetooth/servers/kbtobexsrv
 %dir %{_datadir}/apps/kdebluetooth
