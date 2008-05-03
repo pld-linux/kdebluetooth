@@ -166,6 +166,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.la
 %dir %{_includedir}/libkbluetooth
 %{_includedir}/libkbluetooth/*.h
-%{_includedir}/libkbluetooth/*.cpp
+#%{_includedir}/libkbluetooth/*.cpp
 %dir %{_includedir}/qobex
 %{_includedir}/qobex/*.h
