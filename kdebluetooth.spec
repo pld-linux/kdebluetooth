@@ -6,7 +6,7 @@ Summary:	KDE Bluetooth framework
 Summary(pl.UTF-8):	Podstawowe środowisko KDE Bluetooth
 Name:		kdebluetooth
 Version:	1.0
-Release:	0.%{_beta}.4
+Release:	0.%{_beta}.5
 Epoch:		1
 License:	GPL
 Group:		X11/Applications
@@ -19,6 +19,7 @@ Patch1:		%{name}-dun_and_fax_handler-desktopfiles.patch
 Patch2:		%{name}-nolibsdp.patch
 Patch3:		kde-ac260-lt.patch
 Patch4:		kde-am.patch
+Patch5:		%{name}-gcc.patch
 URL:		http://bluetooth.kmobiletools.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
@@ -78,6 +79,7 @@ Pliki nagłówkowe bibliotek kdebluetooth.
 #%patch2 -p1
 %patch3 -p1
 #%patch4 -p1
+%patch5 -p0
 
 %build
 cp %{_datadir}/automake/config.sub admin
@@ -86,7 +88,6 @@ cp %{_datadir}/automake/config.sub admin
 %configure \
 	--%{!?debug:dis}%{?debug:en}able-debug \
 	%{!?debug:--disable-rpath} \
-	--with-bluetooth-libraries=%{_libdir} \
 	--with-qt-libraries=%{_libdir}
 
 %{__make}
