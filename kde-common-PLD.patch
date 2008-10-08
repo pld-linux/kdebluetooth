@@ -151,3 +151,24 @@
              return 0; # don't touch me
          }
          for $opt (@kde_options) {
+
+--- x/admin/acinclude.m4.in.orig	2008-10-08 10:18:48.844247699 +0200
++++ x/admin/acinclude.m4.in	2008-10-08 10:21:26.884232831 +0200
+@@ -4612,7 +4612,8 @@
+ 
+ AC_DEFUN([KDE_CHECK_PYTHON],
+ [
+-  KDE_CHECK_PYTHON_INTERN("2.5",
++ KDE_CHECK_PYTHON_INTERN("2.6",
++  [KDE_CHECK_PYTHON_INTERN("2.5",
+     [KDE_CHECK_PYTHON_INTERN("2.4",
+      [KDE_CHECK_PYTHON_INTERN("2.3", 
+        [KDE_CHECK_PYTHON_INTERN("2.2", 
+@@ -4624,6 +4625,7 @@
+        ])
+      ])
+   ])
++ ])
+ ])
+ 
+ AC_DEFUN([KDE_CHECK_STL],
