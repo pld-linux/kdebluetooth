@@ -26,7 +26,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6.1
 BuildRequires:	bluez-libs-devel >= 2.6-2
 BuildRequires:	dbus-qt-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	kdelibs-devel
 BuildRequires:	kdepim-devel
 BuildRequires:	libmad-devel
